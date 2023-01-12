@@ -30,21 +30,31 @@ func main() {
 		fmt.Println("Enter number of tickets: ")
 		fmt.Scan(&userTickets)
 
-		bookings = append(bookings, firstName+" "+lastName)
+		for userTickets > remainingTickets {
+			fmt.Printf("We have a total of %v tickets and %v tickets are still available.\n", conferenceTickets, remainingTickets)
+			fmt.Println("Enter number of tickets: ")
+			fmt.Scan(&userTickets)
+		}
 
-		fmt.Printf("The whoel slice : %v\n", bookings)
-		fmt.Printf("The first value : %v\n", bookings[0])
-		fmt.Printf("The slice type : %T\n", bookings)
-		fmt.Printf("The slice length : %v\n", len(bookings))
+		if userTickets != 0 {
+			bookings = append(bookings, firstName+" "+lastName)
+
+			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v, \n", firstName, lastName, userTickets, email)
+			fmt.Printf("The whoel slice : %v\n", bookings)
+			fmt.Printf("The first value : %v\n", bookings[0])
+			fmt.Printf("The slice type : %T\n", bookings)
+			fmt.Printf("The slice length : %v\n", len(bookings))
+		}
 
 		remainingTickets = remainingTickets - userTickets
 
-		if userTickets != 0 {
-			fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v, \n", firstName, lastName, userTickets, email)
-		}
 		fmt.Printf("%v tickets remaining for %v \n", remainingTickets, conferenceName)
-
 		fmt.Printf("These are all our bookings: %v\n", bookings)
+
+		if remainingTickets == 0 {
+			fmt.Printf("All tickets are booked for %v. Thank you!", conferenceName)
+			break
+		}
 	}
 
 }
